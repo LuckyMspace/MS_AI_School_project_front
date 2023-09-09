@@ -20,7 +20,7 @@ def image_upload_section():
                 st.image(file_stream, caption="업로드된 이미지", use_column_width=True)
 
                 if st.button('AI에게 사진 보내기'):
-                    flask_server_url = "http://localhost:5000/upload"
+                    flask_server_url = "http://localhost:5000/upload"  # 엔드포인트 (이미지 업로드)
                     files = {"file": (uploaded_file.name, file_stream)}
                     response = requests.post(flask_server_url, files=files)
                     if response.status_code == 200:
@@ -31,3 +31,6 @@ def image_upload_section():
 
     with right_column:
         st.image("./front_images/upload_session_image.jpg", use_column_width=True)
+
+if __name__ == "__main__":
+    image_upload_section()
