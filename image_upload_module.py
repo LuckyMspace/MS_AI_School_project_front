@@ -1,9 +1,15 @@
+# image_upload_module.py
 import streamlit as st
 import requests
 from io import BytesIO
 import mimetypes
 
 def image_upload_section():
+    # 로딩 중이라면 이 함수의 나머지 부분을 실행하지 않는다.
+    if st.session_state['loading']:
+        return
+    
+    # 로딩 중이 아니라면, 원래 하려던 작업을 수행합니다.
     left_column, right_column = st.columns(2)
     
     with left_column:
@@ -20,17 +26,17 @@ def image_upload_section():
                 st.image(file_stream, caption="업로드된 이미지", use_column_width=True)
 
                 if st.button('AI에게 사진 보내기'):
-                    flask_server_url = "http://localhost:5000/upload"  # 엔드포인트 (이미지 업로드)
+                    flask_server_url = "http://localhost:5000/upload"
                     files = {"file": (uploaded_file.name, file_stream)}
-                    response = requests.post(flask_server_url, files=files)
+                    response = requests.post(flask_server_url, files=files)                    
                     if response.status_code == 200:
-                        st.session_state['loading'] = True
+                        st.session_state['loading'] = True                                                
+                        st.experimental_rerun()
                     else:
-                        st.session_state['fail'] = True
                         st.error("이미지 전송 실패")
 
     with right_column:
         st.image("./front_images/upload_session_image.jpg", use_column_width=True)
 
-if __name__ == "__main__":
-    image_upload_section()
+# if __name__ == "__main__":
+    # image_upload_section()

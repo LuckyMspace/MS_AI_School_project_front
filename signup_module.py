@@ -16,6 +16,7 @@ def signup_section():
         signup_confirm_pw = st.text_input("confirm_password", type="password")
         signup_gender = st.selectbox("gender", ["Male", "Female"])
 
+        # 형식검증 없애자고 했던 것 같음
         # 이메일 형식 검증
         def validate_email(email):
             regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w+$'  # 이거 더 고쳐야됨...
