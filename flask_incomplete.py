@@ -9,7 +9,7 @@ def login():
     password = request.form.get('password')
     
     # 임시코드에 불과함. 추후에 DB에서 회원정보를 검증하는 코드로 바꿔야함.
-    if email == "test@test.com" and password == "password":    
+    if email in ["test@test.com", "test@gmail.com"] and password == "password":    
         return jsonify({"message": "로그인 성공"}), 200
     else:
         return jsonify({"message": "이메일 주소와 비밀번호를 확인해주세요."}), 401
