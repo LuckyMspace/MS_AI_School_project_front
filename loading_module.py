@@ -12,15 +12,13 @@ def result_backend_check():
         return None
 
 def loading_session():
-    left_column, right_column = st.columns(2)
 
-    with left_column:
+    # Show loading UI only when st.session_state['loading'] is True
+    if st.session_state.get('loading', False):
         st.image("./front_images/loading_image.jpg")
-
-    with right_column:  # 여기도 꾸미는건 나중에
         st.write("AI가 의류를 분석중입니다.")
         st.write("잠시만 기다려주세요...")
-    
+        
         time_placeholder = st.empty()  # 시간을 업데이트할 플레이스홀더
         start_time = time.time()
         retries = 0  # 재시도 횟수를 제한하기 위한 변수
