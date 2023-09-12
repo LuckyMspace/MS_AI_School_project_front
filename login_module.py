@@ -21,7 +21,7 @@ def login_section():
         if left_column.button("로그인"):
             try:
                 response = requests.post(
-                    "http://localhost:5000/sign-in",
+                    "http://localhost:5000/login",
                     json={"email": email, "pw": password},
                 )
                 if response.status_code == 200:
@@ -39,6 +39,7 @@ def login_section():
 
         if left_column.button("회원가입"):
             st.session_state["sign_up"] = True
+            st.experimental_rerun()
 
     right_column.image("./front_images/main_image.jpg", use_column_width=True)
 

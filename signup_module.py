@@ -54,3 +54,6 @@ def signup_section():
                     st.error("이메일 형식으로 입력해주세요.")
             else:
                 st.error("비밀번호가 일치하지 않습니다.")
+        
+        if st.button("전으로"):
+            st.session_state['sign-up'] = False
