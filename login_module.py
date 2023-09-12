@@ -21,7 +21,7 @@ def login_section():
         if left_column.button("로그인"):
             try:
                 response = requests.post(
-                    "http://localhost:5000/login",
+                    "http://localhost:5000/sign-in",
                     json={"email": email, "pw": password},
                 )
                 if response.status_code == 200:
@@ -37,7 +37,7 @@ def login_section():
             except Exception as e:
                 st.error(f"서버와 통신 중 문제가 발생했습니다: {e}")
 
-        elif left_column.button("회원가입"):
+        if left_column.button("회원가입"):
             st.session_state["sign_up"] = True
 
     right_column.image("./front_images/main_image.jpg", use_column_width=True)
