@@ -21,6 +21,8 @@ if "fail" not in st.session_state:
     st.session_state["fail"] = False
 if "current_page" not in st.session_state:
     st.session_state["current_page"] = "login"
+if "uploaded_befor" not in st.session_state:
+    st.session_state["uploaded_before"] = False
 
 # 유저 정보 상태
 if st.session_state.get("logged_in", False):
@@ -47,14 +49,13 @@ else:  # Logged in
         login_section()
     elif st.session_state["current_page"] == "image_upload":
         login_section() # from upload
-    elif st.session_state["loading"]:  # Loading session
+    elif st.session_state["current_page"] == "loading":  # Loading session
         loading_session()
     elif st.session_state["current_page"] == "result":  # Result session
         result_session()
     elif st.session_state["fail"]:  # Fail session
         fail()
     else:  # Default to image upload section
-        login_section() # from upload
-
-        if not st.session_state.get("loading", False):
-            login_section() # from upload
+        print("Arrived at else")
+        login_section() # from upload her
+    

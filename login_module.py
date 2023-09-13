@@ -28,7 +28,7 @@ def login_section():
                 "street",
             ]
             selected_options = st.multiselect(
-                " :heavy_check_mark: 원하는 스타일을 하나만 선택해주세요", options, max_selections=1
+                " :heavy_check_mark: 원하는 스타일을 하나만 선택해주세요", options, max_selections=1, key="K"
             )
             # st.subheader(" ", divider="rainbow")  # ln2
 
@@ -73,7 +73,7 @@ def login_section():
                         st.write(st.session_state["email"])
 
                         st.session_state["loading"] = True
-                        st.session_state["current_page"] = "loading"  # dummy page value
+                        st.session_state["current_page"] = "loading"
                         st.experimental_rerun()
 
             st.subheader(" ", divider="grey")  # ln3

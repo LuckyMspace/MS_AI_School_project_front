@@ -40,8 +40,7 @@ def loading_session():
     )
     st.subheader("AI패션 추천 서비스", divider="grey")
 
-    if st.session_state.get("loading", False):
-        st.image("./front_images/loading_ai_6.gif", use_column_width=True)
+    st.image("./front_images/loading_ai_6.gif", use_column_width=True)
 
     st.write("AI가 열심히 분석중입니다.")
     st.write("잠시만 기다려주세요...")
@@ -49,7 +48,8 @@ def loading_session():
     st.subheader(" ", divider="grey")
 
     if st.button(":rewind: 이미지 다시 올리기"):
-        st.session_state["loading"] = False
+        # st.session_state["loading"] = False
+        st.session_state["current_page"] = "image_upload"
         st.experimental_rerun()
 
     if st.button(":x: 로그아웃"):
