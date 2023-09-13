@@ -3,6 +3,7 @@ import requests
 from PIL import Image
 from io import BytesIO
 
+
 def result_json():
     json_url = "http://localhost:5000/result_json"  # 엔드포인트
     try:
@@ -16,45 +17,63 @@ def result_json():
     except requests.RequestException as e:
         st.error(f"json 파일을 가져올 수 없습니다. 에러: {e}")
         return None
-    
+
+
 def result_session():
+    if not st.session_state.get("logged_in", False):
+        st.warning("로그인이 필요한 서비스입니다.")
+        st.experimental_rerun()
+
     # UI 나누기
-    st.markdown("<span style='color:blue; font-size:28px; font-family:Arial;'>AI가 추천합니다.(꾸미는 건 나중에 하기로)</span>", unsafe_allow_html=True)    
+    st.markdown(
+        "<span style='color:blue; font-size:28px; font-family:Arial;'>AI가 추천합니다.(꾸미는 건 나중에 하기로)</span>",
+        unsafe_allow_html=True,
+    )
     left_column, right_column = st.columns(2)
-    
+
     data = result_json()
     if data is None:
         st.error("No data available")
         return
-    
-    with left_column:        
-        st.title(data['set_name'])
-        st.write(' ')
-        st.image(data['set_url'], use_column_width=True)
 
-    item_names = [item['item'] for item in data['items']]
-    
+    with left_column:
+        st.title(data["set_name"])
+        st.write(" ")
+        st.image(data["set_url"], use_column_width=True)
+
+    item_names = [item["item"] for item in data["items"]]
+
     with right_column:
-        selected_item_index = st.slider("슬라이더로 아이템을 선택하세요.", 0, len(item_names)-1)
-        selected_item = data['items'][selected_item_index]
-        
-        st.image(selected_item['thumb_url'], caption=selected_item['item'], use_column_width=True)
-        st.write(f"Price: {selected_item['curr_price']}")
-        link = selected_item['link']
-        
-        st.markdown(f"<a style='display:block;text-align:center;background-color:#4CAF50;color:white;padding:14px 20px;margin: 8px 0;width:100%;' href='{link}' target='_blank'>구매하러 가기</a>", unsafe_allow_html=True)
+        selected_item_index = st.slider(
+            " :heavy_check_mark: 슬라이더로 아이템을 선택하세요.", 0, len(item_names) - 1
+        )
+        selected_item = data["items"][selected_item_index]
 
-    
+        st.image(
+            selected_item["thumb_url"],
+            caption=selected_item["item"],
+            use_column_width=True,
+        )
+        st.write(f"Price: {selected_item['curr_price']}")
+        link = selected_item["link"]
+
+        st.markdown(
+            f"<a style='display:block;text-align:center;background-color:#4CAF50;color:white;padding:14px 20px;margin: 8px 0;width:100%;' href='{link}' target='_blank'>구매하러 가기</a>",
+            unsafe_allow_html=True,
+        )
+        if st.button(" :rewind: 이미지 업로드 다시하기"):
+            st.session_state["logged_in"] = False
+            st.experimental_rerun()
 
 
 # ------------------------------프론트 예시코드-----------------------------------------------------------------
 
 # def result():
 #     # UI 나누기
-#     st.markdown("<span style='color:blue; font-size:28px; font-family:Arial;'>AI가 추천합니다.(어떻게 꾸밀지 고민중)</span>", unsafe_allow_html=True)    
+#     st.markdown("<span style='color:blue; font-size:28px; font-family:Arial;'>AI가 추천합니다.(어떻게 꾸밀지 고민중)</span>", unsafe_allow_html=True)
 #     left_column, right_column = st.columns(2)
-    
-#     # 근데 이 json파일을 받으면 어떻게 
+
+#     # 근데 이 json파일을 받으면 어떻게
 #     data = {
 #         "_id": {
 #             "$oid": "object1hash"
@@ -85,21 +104,21 @@ def result_session():
 #         ]
 #     }
 
-#     with left_column:        
+#     with left_column:
 #         st.title(data['set_name'])
 #         st.write(' ')
 #         st.image(data['set_url'], use_column_width=True)
 
 #     item_names = [item['item'] for item in data['items']]
-    
+
 #     with right_column:
 #         selected_item_index = st.slider("슬라이더로 아이템을 선택하세요.", 0, len(item_names)-1)
 #         selected_item = data['items'][selected_item_index]
-        
+
 #         st.image(selected_item['thumb_url'], caption=selected_item['item'], use_column_width=True)
 #         st.write(f"Price: {selected_item['curr_price']}")
 #         link = selected_item['link']
-        
+
 #         st.markdown(f"<a style='display:block;text-align:center;background-color:#4CAF50;color:white;padding:14px 20px;margin: 8px 0;width:100%;' href='{link}' target='_blank'>구매하러 가기</a>", unsafe_allow_html=True)
 
 
