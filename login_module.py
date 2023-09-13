@@ -119,7 +119,7 @@ def login_section():
                     left_column.error("로그인 실패")
             except Exception as e:
                 st.error(f"서버와 통신 중 문제가 발생했습니다: {e}")
-
+                
         if left_column.button(":man-woman-girl-boy:회원가입"):
             st.session_state["sign_up"] = True
             st.experimental_rerun()
