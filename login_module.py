@@ -58,36 +58,29 @@ def login_section():
 
                         # 파일 데이터를 bytes로 읽어옵니다.
                         file_bytes = file_stream.getvalue()
-
                         # 스타일 정보를 딕셔너리에 넣습니다.
                         data_to_send = {
                             "style": ",".join(
                                 selected_options
                             )  # 스타일 정보를 쉼표로 구분된 문자열로 변환
                         }
-
                         # 파일 바이트 데이터
-                        files = {"image": file_stream}
-
+                        files = {
+                            "email": st.session_state["email"],
+                            "style": ",".join(selected_options),
+                            "image": file_bytes,
+                        }
+                        st.session_state["flask_upload_url"] = flask_server_url
+                        st.session_state["request_form"] = files
                         # st.write(f"딕셔너리 디버깅 : {data_to_send}, {files}")
-
                         # data_to_send 딕셔너리는 'data' 파라미터로, 파일은 'files' 파라미터로 전달
                         st.write(st.session_state["email"])
-                        response = requests.post(
-                            flask_server_url,
-                            files={
-                                "email": st.session_state["email"],
-                                "style": ",".join(selected_options),
-                                "image": file_bytes,
-                            },
-                        )
-
-                        if response.status_code == 200:
-                            st.session_state["loading"] = True
-                            st.experimental_rerun()
-                        else:
-                            error_message = response.json().get("error")
-                            st.error(f"이미지 전송 실패: {error_message}")
+                        
+                        st.session_state["loading"] = True
+                        st.session_state["current_page"] = "loading" #dummy page value
+                        st.experimental_rerun()
+                        
+                        
             st.subheader(" ", divider="grey")  # ln3
             if st.button(":x:로그아웃"):
                 st.session_state["logged_in"] = False

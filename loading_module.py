@@ -2,6 +2,24 @@ import streamlit as st
 import time
 import requests
 
+def result_backend():
+    if not st.session_state["flask_upload_url"]:
+        print("No url")
+    if not st.session_state["request_form"]:
+        print("No files")
+    
+    response = requests.post(
+        st.session_state["flask_upload_url"],
+        files=st.session_state["request_form"],
+    )
+    if response.status_code == 200:
+        st.session_state["current_page"] = "result"
+        st.session_state["loading"] = False
+        print("Go to result")
+        st.experimental_rerun()
+    else:
+        error_message = response.json().get("error")
+        st.error(f"이미지 전송 실패: {error_message}")
 
 def result_backend_check():
     try:
@@ -37,6 +55,8 @@ def loading_session():
     if st.button(":x: 로그아웃"):
         st.session_state["logged_in"] = False
         st.experimental_rerun()
+        
+    result_backend()
 
 
 if __name__ == "__main__":
