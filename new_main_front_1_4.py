@@ -4,7 +4,6 @@ from image_upload_module import image_upload_section
 from signup_module import signup_section
 from result_module import result_session
 from loading_module import loading_session
-from fail_module import fail
 
 
 # Initialize session states if not already done
@@ -50,8 +49,6 @@ else:  # Logged in
         loading_session()
     elif st.session_state["result"]:  # Result session
         result_session()
-    elif st.session_state["fail"]:  # Fail session
-        fail()
     else:  # Default to image upload section
         image_upload_section()
 
