@@ -41,16 +41,17 @@ if not st.session_state["logged_in"]:  # 비 로그인상태
         login_section()
 
 else:  # Logged in
+    print("Logged")
     if st.session_state["current_page"] == "login":
         login_section()
     elif st.session_state["current_page"] == "image_upload":
-        image_upload_section()
+        login_section() # from upload
     elif st.session_state["loading"]:  # Loading session
         loading_session()
-    elif st.session_state["result"]:  # Result session
+    elif st.session_state["current_page"] == "result":  # Result session
         result_session()
     else:  # Default to image upload section
-        image_upload_section()
+        login_section() # from upload
 
         if not st.session_state.get("loading", False):
-            image_upload_section()
+            login_section() # from upload
