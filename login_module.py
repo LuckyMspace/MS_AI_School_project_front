@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-from image_upload_module import image_upload_section
 from io import BytesIO
 import mimetypes
 
