@@ -1,6 +1,5 @@
 import streamlit as st
 from login_module import login_section
-from image_upload_module import image_upload_section
 from signup_module import signup_section
 from result_module import result_session
 from loading_module import loading_session
@@ -46,7 +45,7 @@ else:  # Logged in
     if st.session_state["current_page"] == "login":
         login_section()
     elif st.session_state["current_page"] == "image_upload":
-        login_section() # from upload
+        login_section()  # from upload
     elif st.session_state["loading"]:  # Loading session
         loading_session()
     elif st.session_state["current_page"] == "result":  # Result session
@@ -54,7 +53,7 @@ else:  # Logged in
     elif st.session_state["fail"]:  # Fail session
         fail()
     else:  # Default to image upload section
-        login_section() # from upload
+        login_section()  # from upload
 
         if not st.session_state.get("loading", False):
-            login_section() # from upload
+            login_section()  # from upload

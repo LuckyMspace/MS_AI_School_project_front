@@ -59,6 +59,8 @@ def signup_section():
                     st.error("이메일 형식으로 입력해주세요.")
             else:
                 st.error("비밀번호가 일치하지 않습니다.")
-        if st.button("돌아가기"):
+
+        if st.button(":rewind: 돌아가기"):
             st.session_state["sign_up"] = False
+            st.session_state["current_page"] = "login"
             st.experimental_rerun()
