@@ -29,7 +29,6 @@ def login_section():
             selected_options = st.multiselect(
                 " :heavy_check_mark: 원하는 스타일을 하나만 선택해주세요", options, max_selections=1, key="K"
             )
-            # st.subheader(" ", divider="rainbow")  # ln2
 
             uploaded_file = st.file_uploader(
                 ":heavy_check_mark: 아래에서 이미지를 업로드 하세요. :camera:",
@@ -62,7 +61,7 @@ def login_section():
                         # 파일 바이트 데이터
                         files = {
                             "email": st.session_state["email"],
-                            "style": ",".join(selected_options),
+                            "style": "".join(selected_options),
                             "image": file_bytes,
                         }
                         st.session_state["flask_upload_url"] = flask_server_url
