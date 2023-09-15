@@ -34,6 +34,9 @@ def login_section():
                 ":heavy_check_mark: 아래에서 이미지를 업로드 하세요. :camera:",
                 type=["jpg", "jpeg", "png"],
             )
+            if selected_options :
+                st.session_state["selected"] = selected_options
+            
 
             if uploaded_file:
                 ext = mimetypes.guess_extension(uploaded_file.type)
@@ -42,7 +45,6 @@ def login_section():
                         ":ballot_box_with_check: 업로드 파일을 다시 확인해주시고, 의류 이미지를 업로드 해주세요."
                     )
                 else:
-                    st.session_state["selected"] = selected_options
                     file_stream = BytesIO(uploaded_file.read())
                     st.session_state["uploaded_file"] = file_stream
                 

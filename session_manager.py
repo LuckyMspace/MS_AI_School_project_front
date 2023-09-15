@@ -16,6 +16,8 @@ def session_state_init():
         st.session_state["fail"] = False
     if "current_page" not in st.session_state:
         st.session_state["current_page"] = "login"
+    if "user" not in st.session_state:
+        st.session_state["user"] = ""
 
 
     # Upload session
@@ -23,3 +25,7 @@ def session_state_init():
         st.session_state["uploaded_file"] = None
     if "selected" not in st.session_state:
         st.session_state["selected"] = None
+        
+    # Result session
+    if "result" not in st.session_state:
+        st.session_state["result"] = None
