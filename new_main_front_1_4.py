@@ -1,5 +1,5 @@
 import streamlit as st
-from login_module import login_section
+from login_upload_module import login_section
 from signup_module import signup_section
 from result_module import result_session
 from loading_module import loading_session
