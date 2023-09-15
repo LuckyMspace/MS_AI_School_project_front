@@ -27,16 +27,18 @@ def login_section():
                 "street",
             ]
             selected_options = st.multiselect(
-                " :heavy_check_mark: 원하는 스타일을 하나만 선택해주세요", options, max_selections=1, key="K"
+                " :heavy_check_mark: 원하는 스타일을 하나만 선택해주세요",
+                options,
+                max_selections=1,
+                key="K",
             )
 
             uploaded_file = st.file_uploader(
                 ":heavy_check_mark: 아래에서 이미지를 업로드 하세요. :camera:",
                 type=["jpg", "jpeg", "png"],
             )
-            if selected_options :
+            if selected_options:
                 st.session_state["selected"] = selected_options
-            
 
             if uploaded_file:
                 ext = mimetypes.guess_extension(uploaded_file.type)
@@ -47,12 +49,16 @@ def login_section():
                 else:
                     file_stream = BytesIO(uploaded_file.read())
                     st.session_state["uploaded_file"] = file_stream
-                
-                
+
             if st.session_state["uploaded_file"]:
-                st.image(st.session_state["uploaded_file"], caption="업로드된 이미지", use_column_width=True)
-                    
+                st.image(
+                    st.session_state["uploaded_file"],
+                    caption="업로드된 이미지",
+                    use_column_width=True,
+                )
+
             if st.session_state["uploaded_file"] and st.session_state["selected"]:
+
                 def upload_request():
                     flask_server_url = "http://localhost:5000/upload"
                     # 파일 데이터를 bytes로 읽어옵니다.
@@ -71,8 +77,8 @@ def login_section():
                     st.session_state["loading"] = True
                     st.session_state["current_page"] = "loading"
                     st.experimental_rerun()
+
                 st.button(":postbox: AI에게 이미지 보내기", on_click=upload_request)
-                        
 
             st.subheader(" ", divider="grey")  # ln3
             if st.button(":x:로그아웃"):

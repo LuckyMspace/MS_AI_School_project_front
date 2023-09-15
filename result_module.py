@@ -33,14 +33,14 @@ def result_session():
 
     # data = result_json() # removed by acensia
     # change types
-    rec = st.session_state["result"]['rec']
-    data = st.session_state["result"]['result']
+    rec = st.session_state["result"]["rec"]
+    data = st.session_state["result"]["result"]
     print(data)
     if not data:
         st.title("이런 스타일은 어떠세요?")
         for r in rec:
             st.write(r)
-        
+
         # st.error("No data available")
     else:
         with left_column:

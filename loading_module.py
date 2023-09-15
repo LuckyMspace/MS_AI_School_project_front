@@ -1,13 +1,17 @@
 import streamlit as st
 import time
+import requests
+
 import requests, json
 
+
 def result_backend():
+    st.write("디버깅 : result_backend1")  # 디버깅
     if not st.session_state["flask_upload_url"]:
         print("No url")
     if not st.session_state["request_form"]:
         print("No files")
-    
+
     response = requests.post(
         st.session_state["flask_upload_url"],
         files=st.session_state["request_form"],
@@ -26,14 +30,14 @@ def result_backend():
         time.sleep(3)
         st.session_state["current_page"] = "image_upload"
         st.experimental_rerun()
-        
 
 
 def loading_session():
-    st.markdown(
-        f"<div style='text-align: right; font-size: 12px;'>로그인 유저: {st.session_state.get('email', '이메일 없음')}</div>",
-        unsafe_allow_html=True,
-    )
+    st.write("디버깅 : loading_session function activate")  # 디버깅
+    # st.markdown(
+    #     f"<div style='text-align: right; font-size: 12px;'>로그인 유저: {st.session_state.get('email', '이메일 없음')}</div>",
+    #     unsafe_allow_html=True,
+    # )
     st.subheader("AI패션 추천 서비스", divider="grey")
     if st.session_state["loading"]:
         st.image("./front_images/loading_ai_6.gif", use_column_width=True)
@@ -51,11 +55,11 @@ def loading_session():
     if st.button(":x: 로그아웃"):
         st.session_state["logged_in"] = False
         st.experimental_rerun()
-        
+
     result_backend()
 
 
-if __name__ == "__main__":
-    if "loading" not in st.session_state:
-        st.session_state["loading"] = True
-    loading_session()
+# if __name__ == "__main__":
+#     if "loading" not in st.session_state:
+#         st.session_state["loading"] = True
+#     loading_session()

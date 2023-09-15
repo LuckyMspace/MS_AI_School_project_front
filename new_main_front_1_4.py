@@ -9,7 +9,6 @@ from session_manager import session_state_init
 session_state_init()
 
 
-
 # 유저 정보 상태
 if st.session_state.get("logged_in", False):
     st.markdown(
@@ -33,12 +32,10 @@ else:  # Logged in
     if st.session_state["current_page"] == "login":
         login_section()
     elif st.session_state["current_page"] == "image_upload":
-        login_section() # from upload
+        login_section()  # from upload
     elif st.session_state["current_page"] == "loading":  # Loading session
         loading_session()
     elif st.session_state["current_page"] == "result":  # Result session
         result_session()
     else:  # Default to image upload section
-        print("Arrived at else")
-        login_section() # from upload her
-    
+        login_section()  # from upload
