@@ -1,5 +1,7 @@
 import streamlit as st
 import time
+import requests
+
 import requests, json
 
 def result_backend():

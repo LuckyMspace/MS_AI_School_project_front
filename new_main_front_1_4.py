@@ -3,12 +3,10 @@ from login_upload_module import login_section
 from signup_module import signup_section
 from result_module import result_session
 from loading_module import loading_session
-from fail_module import fail
 
 from session_manager import session_state_init
 
 session_state_init()
-
 
 
 # 유저 정보 상태
@@ -34,14 +32,10 @@ else:  # Logged in
     if st.session_state["current_page"] == "login":
         login_section()
     elif st.session_state["current_page"] == "image_upload":
-        login_section() # from upload
+        login_section()  # from upload
     elif st.session_state["current_page"] == "loading":  # Loading session
         loading_session()
     elif st.session_state["current_page"] == "result":  # Result session
         result_session()
-    elif st.session_state["fail"]:  # Fail session
-        fail()
     else:  # Default to image upload section
-        print("Arrived at else")
-        login_section() # from upload her
-    
+        login_section()  # from upload
