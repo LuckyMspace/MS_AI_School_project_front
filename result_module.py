@@ -5,7 +5,7 @@ from io import BytesIO
 
 
 def result_json():
-    json_url = "http://localhost:5000/result_json"  # 엔드포인트
+    json_url = "http://localhost:5000/upload"  # 엔드포인트
     try:
         response = requests.get(json_url)
         response.raise_for_status()  # 200 OK 코드가 아니면 예외 발생

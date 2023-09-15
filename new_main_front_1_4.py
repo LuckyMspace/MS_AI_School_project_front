@@ -54,6 +54,3 @@ else:  # Logged in
         fail()
     else:  # Default to image upload section
         login_section()  # from upload
-
-        if not st.session_state.get("loading", False):
-            login_section()  # from upload

@@ -43,7 +43,6 @@ def login_section():
                     )
                 else:
                     file_stream = BytesIO(uploaded_file.read())
-                    st.write(file_stream)
                     uploaded_file.seek(0)
                     st.image(file_stream, caption="업로드된 이미지", use_column_width=True)
 
