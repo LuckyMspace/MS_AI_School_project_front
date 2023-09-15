@@ -5,6 +5,10 @@ import mimetypes
 
 
 def login_section():
+    if "uploaded_file" not in st.session_state:
+        st.session_state["uploaded_file"] = None
+    if "selected" not in st.session_state:
+        st.session_state["selected"] = None
     left_column, right_column = st.columns(2)
 
     # 로그인 상태마다 다른 UI 적용하기
@@ -35,44 +39,41 @@ def login_section():
                 type=["jpg", "jpeg", "png"],
             )
 
-            if uploaded_file is not None:
+            if uploaded_file:
                 ext = mimetypes.guess_extension(uploaded_file.type)
                 if ext not in [".jpg", ".jpeg", ".png"]:
                     st.error(
                         ":ballot_box_with_check: 업로드 파일을 다시 확인해주시고, 의류 이미지를 업로드 해주세요."
                     )
                 else:
+                    st.session_state["selected"] = selected_options
                     file_stream = BytesIO(uploaded_file.read())
+                    st.session_state["uploaded_file"] = file_stream
                     st.write(file_stream)
                     uploaded_file.seek(0)
                     st.image(file_stream, caption="업로드된 이미지", use_column_width=True)
-
-                    if st.button(":postbox: AI에게 이미지 보내기"):
-                        flask_server_url = "http://localhost:5000/upload"
-
-                        # 파일 데이터를 bytes로 읽어옵니다.
-                        file_bytes = file_stream.getvalue()
-                        # 스타일 정보를 딕셔너리에 넣습니다.
-                        data_to_send = {
-                            "style": ",".join(
-                                selected_options
-                            )  # 스타일 정보를 쉼표로 구분된 문자열로 변환
-                        }
-                        # 파일 바이트 데이터
-                        files = {
-                            "email": st.session_state["email"],
-                            "style": "".join(selected_options),
-                            "image": file_bytes,
-                        }
-                        st.session_state["flask_upload_url"] = flask_server_url
-                        st.session_state["request_form"] = files
-                        # st.write(f"딕셔너리 디버깅 : {data_to_send}, {files}")
-                        # data_to_send 딕셔너리는 'data' 파라미터로, 파일은 'files' 파라미터로 전달
-                        st.write(st.session_state["email"])
-
-                        st.session_state["loading"] = True
-                        st.session_state["current_page"] = "loading"
-                        st.experimental_rerun()
+                    
+            if st.session_state["uploaded_file"] and st.session_state["selected"]:
+                def upload_request():
+                    flask_server_url = "http://localhost:5000/upload"
+                    # 파일 데이터를 bytes로 읽어옵니다.
+                    file_bytes = st.session_state["uploaded_file"].getvalue()
+                    # 파일 바이트 데이터
+                    files = {
+                        "email": st.session_state["email"],
+                        "style": "".join(st.session_state["selected"]),
+                        "image": file_bytes,
+                    }
+                    st.session_state["flask_upload_url"] = flask_server_url
+                    st.session_state["request_form"] = files
+                    # st.write(f"딕셔너리 디버깅 : {data_to_send}, {files}")
+                    # data_to_send 딕셔너리는 'data' 파라미터로, 파일은 'files' 파라미터로 전달
+                    st.write(st.session_state["email"])
+                    st.session_state["loading"] = True
+                    st.session_state["current_page"] = "loading"
+                    st.experimental_rerun()
+                st.button(":postbox: AI에게 이미지 보내기", on_click=upload_request)
+                        
 
             st.subheader(" ", divider="grey")  # ln3
             if st.button(":x:로그아웃"):

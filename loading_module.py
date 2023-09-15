@@ -20,17 +20,11 @@ def result_backend():
     else:
         error_message = response.json().get("error")
         st.error(f"이미지 전송 실패: {error_message}")
-
-def result_backend_check():
-    try:
-        response = requests.get(
-            "http://localhost:5000/result_check", timeout=180
-        )  # 엔드포인트
-        response.raise_for_status()  # HTTP 에러 발생시 예외를 발생시킵니다.
-        return response.json()
-    except requests.RequestException as e:
-        st.warning(f"백엔드로부터 응답이 없거나 잘못된 응답이 왔습니다: {e}")
-        return None
+        st.error("업로드 페이지로 복귀합니다....")
+        time.sleep(3)
+        st.session_state["current_page"] = "image_upload"
+        st.experimental_rerun()
+        
 
 
 def loading_session():

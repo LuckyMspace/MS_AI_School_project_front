@@ -20,8 +20,6 @@ if "fail" not in st.session_state:
     st.session_state["fail"] = False
 if "current_page" not in st.session_state:
     st.session_state["current_page"] = "login"
-if "uploaded_befor" not in st.session_state:
-    st.session_state["uploaded_before"] = False
 
 # 유저 정보 상태
 if st.session_state.get("logged_in", False):
@@ -43,7 +41,6 @@ if not st.session_state["logged_in"]:  # 비 로그인상태
         login_section()
 
 else:  # Logged in
-    print("Logged")
     if st.session_state["current_page"] == "login":
         login_section()
     elif st.session_state["current_page"] == "image_upload":
