@@ -5,21 +5,11 @@ from result_module import result_session
 from loading_module import loading_session
 from fail_module import fail
 
+from session_manager import session_state_init
 
-# Initialize session states if not already done
+session_state_init()
 
-if "logged_in" not in st.session_state:
-    st.session_state["logged_in"] = False
-if "loading" not in st.session_state:
-    st.session_state["loading"] = False
-if "result" not in st.session_state:
-    st.session_state["result"] = False
-if "sign_up" not in st.session_state:
-    st.session_state["sign_up"] = False
-if "fail" not in st.session_state:
-    st.session_state["fail"] = False
-if "current_page" not in st.session_state:
-    st.session_state["current_page"] = "login"
+
 
 # 유저 정보 상태
 if st.session_state.get("logged_in", False):

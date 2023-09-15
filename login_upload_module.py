@@ -5,10 +5,6 @@ import mimetypes
 
 
 def login_section():
-    if "uploaded_file" not in st.session_state:
-        st.session_state["uploaded_file"] = None
-    if "selected" not in st.session_state:
-        st.session_state["selected"] = None
     left_column, right_column = st.columns(2)
 
     # 로그인 상태마다 다른 UI 적용하기
@@ -49,9 +45,10 @@ def login_section():
                     st.session_state["selected"] = selected_options
                     file_stream = BytesIO(uploaded_file.read())
                     st.session_state["uploaded_file"] = file_stream
-                    st.write(file_stream)
-                    uploaded_file.seek(0)
-                    st.image(file_stream, caption="업로드된 이미지", use_column_width=True)
+                
+                
+            if st.session_state["uploaded_file"]:
+                st.image(st.session_state["uploaded_file"], caption="업로드된 이미지", use_column_width=True)
                     
             if st.session_state["uploaded_file"] and st.session_state["selected"]:
                 def upload_request():
