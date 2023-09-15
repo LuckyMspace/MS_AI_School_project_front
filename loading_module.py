@@ -6,7 +6,6 @@ import requests, json
 
 
 def result_backend():
-    st.write("디버깅 : result_backend1")  # 디버깅
     if not st.session_state["flask_upload_url"]:
         print("No url")
     if not st.session_state["request_form"]:
@@ -33,7 +32,6 @@ def result_backend():
 
 
 def loading_session():
-    st.write("디버깅 : loading_session function activate")  # 디버깅
     # st.markdown(
     #     f"<div style='text-align: right; font-size: 12px;'>로그인 유저: {st.session_state.get('email', '이메일 없음')}</div>",
     #     unsafe_allow_html=True,
