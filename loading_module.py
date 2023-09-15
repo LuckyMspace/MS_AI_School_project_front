@@ -3,7 +3,6 @@ import time
 import requests, json
 
 def result_backend():
-    st.write("디버깅 : result_backend1")  # 디버깅
     if not st.session_state["flask_upload_url"]:
         print("No url")
     if not st.session_state["request_form"]:
@@ -31,11 +30,6 @@ def result_backend():
 
 
 def loading_session():
-    st.write("디버깅 : loading_session function activate")  # 디버깅
-    # st.markdown(
-    #     f"<div style='text-align: right; font-size: 12px;'>로그인 유저: {st.session_state.get('email', '이메일 없음')}</div>",
-    #     unsafe_allow_html=True,
-    # )
     st.subheader("AI패션 추천 서비스", divider="grey")
     if st.session_state["loading"]:
         st.image("./front_images/loading_ai_6.gif", use_column_width=True)
