@@ -49,7 +49,7 @@ def signup_section():
         def is_id_available(id):
             # 백엔드로 username 중복 여부를 확인하는 요청을 보냅니다.
             response = requests.post(
-                "http://localhost:5000/send_code", data={"id": signup_id}
+                "http://localhost:5000/verify/send_code", data={"id": signup_id}
             )
             if response.status_code == 200:
                 return response.json()["available"]
