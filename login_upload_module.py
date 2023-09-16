@@ -10,9 +10,6 @@ def login_section():
     # 로그인 상태마다 다른 UI 적용하기
     if st.session_state["logged_in"]:
         with left_column:
-            # st.markdown(
-            #     "<h1 style='font-size: 32px;'>AI패션 추천 서비스</h1>", unsafe_allow_html=True
-            # )
             st.subheader(":robot_face:   AI패션 추천 서비스", divider="grey")  # ln1
 
             options = [
@@ -61,9 +58,7 @@ def login_section():
 
                 def upload_request():
                     flask_server_url = "http://localhost:5000/upload"
-                    # 파일 데이터를 bytes로 읽어옵니다.
                     file_bytes = st.session_state["uploaded_file"].getvalue()
-                    # 파일 바이트 데이터
                     files = {
                         "email": st.session_state["email"],
                         "style": "".join(st.session_state["selected"]),
@@ -71,8 +66,6 @@ def login_section():
                     }
                     st.session_state["flask_upload_url"] = flask_server_url
                     st.session_state["request_form"] = files
-                    # st.write(f"딕셔너리 디버깅 : {data_to_send}, {files}")
-                    # data_to_send 딕셔너리는 'data' 파라미터로, 파일은 'files' 파라미터로 전달
                     st.write(st.session_state["email"])
                     st.session_state["loading"] = True
                     st.session_state["current_page"] = "loading"
@@ -80,15 +73,13 @@ def login_section():
 
                 st.button(":postbox: AI에게 이미지 보내기", on_click=upload_request)
 
-            st.subheader(" ", divider="grey")  # ln3
+            st.subheader(" ", divider="grey")
             if st.button(":x:로그아웃"):
                 st.session_state["logged_in"] = False
                 st.experimental_rerun()
     else:
         left_column.subheader(":robot_face:   AI패션 추천 서비스", divider="grey")
-        email = left_column.text_input(
-            ":e-mail: 이메일 주소", key="unique_login_email"
-        )  # ln4
+        email = left_column.text_input(":e-mail: 이메일 주소", key="unique_login_email")
         password = left_column.text_input(
             ":closed_lock_with_key:비밀번호", type="password", key="login_password"
         )
