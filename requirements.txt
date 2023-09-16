@@ -2,7 +2,7 @@ streamlit
 requests
 email_validator
 
-cv2==4.5.5.62
+opencv
 pymongo
 rembg
 flask
