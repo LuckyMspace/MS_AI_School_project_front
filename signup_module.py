@@ -16,7 +16,7 @@ def signup_section():
         def is_username_available(username):
             # 백엔드로 username 중복 여부를 확인하는 요청을 보냅니다.
             response = requests.post(
-                "https://ms1team.streamlit.app/check_username",
+                "http://localhost:5000/check_username",
                 data={"username": signup_username},
             )
             if response.status_code == 200:
@@ -49,7 +49,7 @@ def signup_section():
         def is_id_available(id):
             # 백엔드로 username 중복 여부를 확인하는 요청을 보냅니다.
             response = requests.post(
-                "https://ms1team.streamlit.app/send_code", data={"id": signup_id}
+                "http://localhost:5000/verify/send_code", data={"id": signup_id}
             )
             if response.status_code == 200:
                 return response.json()["available"]
@@ -81,7 +81,7 @@ def signup_section():
         # 입력한 내용이 바뀔 때마다 확인
         if verification_code:
             response = requests.post(
-                "https://ms1team.streamlit.app/verify",
+                "http://localhost:5000/verify",
                 data={"signup_id": signup_id, "verification_code": verification_code},
             )
             if response.status_code == 200:
@@ -132,7 +132,7 @@ def signup_section():
             if all(signup_data.values()):
                 # 백엔드로 회원가입 데이터 전송 및 응답 처리
                 response = requests.post(
-                    "https://ms1team.streamlit.app/sign-up", json=signup_data
+                    "http://localhost:5000/sign-up", json=signup_data
                 )
 
                 if response.status_code == 200:

@@ -60,7 +60,7 @@ def login_section():
             if st.session_state["uploaded_file"] and st.session_state["selected"]:
 
                 def upload_request():
-                    flask_server_url = "https://ms1team.streamlit.app/upload"
+                    flask_server_url = "http://localhost:5000/upload"
                     # 파일 데이터를 bytes로 읽어옵니다.
                     file_bytes = st.session_state["uploaded_file"].getvalue()
                     # 파일 바이트 데이터
@@ -96,7 +96,7 @@ def login_section():
         if left_column.button(":key:  로그인"):
             try:
                 response = requests.post(
-                    "https://ms1team.streamlit.app/login",
+                    "http://localhost:5000/login",
                     json={"email": email, "pw": password},
                 )
                 if response.status_code == 200:

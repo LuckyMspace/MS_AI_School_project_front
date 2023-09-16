@@ -168,7 +168,7 @@ def login():
 ####### Logout
 @app.route("/logout")
 def logout():
-    res = make_response(redirect("https://ms1team.streamlit.app/"))
+    res = make_response(redirect("http://localhost:8501"))
     res.delete_cookie("user_token")
     return res
 
@@ -235,4 +235,4 @@ def result():
 
 
 if __name__ == "__main__":
-    app.run(host="https://ms1team.streamlit.app", debug=True)
+    app.run(host="0.0.0.0", debug=True)
