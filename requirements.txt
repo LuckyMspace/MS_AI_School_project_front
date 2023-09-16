@@ -1,9 +1,3 @@
 streamlit
 requests
 email_validator
-
-opencv-python
-pymongo
-rembg
-flask
-Pillow
