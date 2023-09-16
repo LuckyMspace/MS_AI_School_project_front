@@ -2,7 +2,8 @@ import streamlit as st
 import time
 import requests
 
-import requests, json
+import requests
+import json
 
 
 def result_backend():
@@ -32,10 +33,6 @@ def result_backend():
 
 
 def loading_session():
-    # st.markdown(
-    #     f"<div style='text-align: right; font-size: 12px;'>로그인 유저: {st.session_state.get('email', '이메일 없음')}</div>",
-    #     unsafe_allow_html=True,
-    # )
     st.subheader("AI패션 추천 서비스", divider="grey")
     if st.session_state["loading"]:
         st.image("./front_images/loading_ai_6.gif", use_column_width=True)
