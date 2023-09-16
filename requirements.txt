@@ -1,3 +1,10 @@
 streamlit
 requests
 email_validator
+
+cv2
+pymongo
+rembg
+flask
+io
+Pillow
