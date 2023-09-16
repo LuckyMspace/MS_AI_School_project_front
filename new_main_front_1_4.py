@@ -6,8 +6,8 @@ from loading_module import loading_session
 
 from session_manager import session_state_init
 
-session_state_init()
 
+session_state_init()
 
 # 유저 정보 상태
 if st.session_state.get("logged_in", False):
