@@ -12,10 +12,7 @@ def result_session():
         st.experimental_rerun()
 
     # UI 나누기
-    st.markdown(
-        "<span style='color:blue; font-size:28px; font-family:Arial;'>AI가 추천합니다.(꾸미는 건 나중에 하기로)</span>",
-        unsafe_allow_html=True,
-    )
+    st.title("이런 스타일은 어떠세요?")
     left_column, right_column = st.columns(2)
 
     def show_set(data):
