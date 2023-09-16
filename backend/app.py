@@ -120,8 +120,8 @@ def upload():
         return jsonify({"error": error_message}), 400
 
 
-####### Sign-up
-@app.route("/sign-up", methods=["POST"])
+####### Sign_up
+@app.route("/sign_up", methods=["POST"])
 def sign_up():
     signup_data = request.json  # => front
     username = signup_data["username"]

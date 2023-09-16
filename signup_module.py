@@ -132,7 +132,7 @@ def signup_section():
             if all(signup_data.values()):
                 # 백엔드로 회원가입 데이터 전송 및 응답 처리
                 response = requests.post(
-                    "http://localhost:5000/sign-up", json=signup_data
+                    "http://localhost:5000/sign_up", json=signup_data
                 )
 
                 if response.status_code == 200:
