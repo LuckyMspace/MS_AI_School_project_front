@@ -1,22 +1,9 @@
 import streamlit as st
-import requests, json
+import requests
+import json
 from PIL import Image
 from io import BytesIO
-
-
-# def result_json():
-#     json_url = "http://localhost:5000/result_json"  # 엔드포인트
-#     try:
-#         response = requests.get(json_url)
-#         response.raise_for_status()  # 200 OK 코드가 아니면 예외 발생
-#         data = response.json()
-#         if data is None:
-#             st.error("아무런 데이터 정보가 없습니다.")
-#             return None
-#         return data
-#     except requests.RequestException as e:
-#         st.error(f"json 파일을 가져올 수 없습니다. 에러: {e}")
-#         return None
+from reference import style_array
 
 
 def result_session():
@@ -31,18 +18,7 @@ def result_session():
     )
     left_column, right_column = st.columns(2)
 
-    # data = result_json() # removed by acensia
-    # change types
-    rec = st.session_state["result"]["rec"]
-    data = st.session_state["result"]["result"]
-    print(data)
-    if not data:
-        st.title("이런 스타일은 어떠세요?")
-        for r in rec:
-            st.write(r)
-
-        # st.error("No data available")
-    else:
+    def show_set(data):
         with left_column:
             st.title(data["set_name"])
             st.write(" ")
@@ -68,9 +44,33 @@ def result_session():
                 f"<a style='display:block;text-align:center;background-color:#4CAF50;color:white;padding:14px 20px;margin: 8px 0;width:100%;' href='{link}' target='_blank'>구매하러 가기</a>",
                 unsafe_allow_html=True,
             )
-            # if st.button(" :rewind: 이미지 업로드 다시하기"):
-            #     st.session_state["current_page"] = "image_upload"
-            #     st.experimental_rerun()
+
+    # data = result_json() # removed by acensia
+    # change types
+    print(st.session_state["result"])
+    found = st.session_state["result"]["found"]
+    style = st.session_state["result"]["style"]
+    searched = st.session_state["result"]["sets"]
+    if not found:
+        st.write("해당하는 추천 set을 찾을 수 없습니다 ;ㅅ;")
+
+    elif style not in searched:
+        st.write(f"선택하신 스타일 {style_array[int(style)]}의 추천 set을 찾을 수 없습니다 ;ㅅ;")
+        # st.error("No data available")
+    else:
+        show_set(searched[style][0])
+
+    def click_sub(sub):
+        st.session_state["result"]["style"] = sub
+        st.experimental_rerun()
+
+    if found:
+        st.title("이런 스타일은 어떠세요?")
+        for sub in searched:
+            if sub == style:
+                continue
+            st.button(style_array[int(sub)], on_click=click_sub, args=sub)
+
     if st.button(":rewind: 이미지 다시 올리기"):
         # st.session_state["loading"] = False
         st.session_state["current_page"] = "image_upload"
