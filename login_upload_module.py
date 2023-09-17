@@ -68,7 +68,7 @@ def login_section():
                     st.session_state["request_form"] = files
                     st.session_state["loading"] = True
                     st.session_state["current_page"] = "loading"
-                    st.experimental_rerun()
+                    st.session_state["needs_rerun"] = True
 
                 st.button(":postbox: AI에게 이미지 보내기", on_click=upload_request)
                         
