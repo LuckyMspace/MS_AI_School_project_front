@@ -1,10 +1,10 @@
 import streamlit as st
-from login_upload_module import login_section
-from signup_module import signup_section
-from result_module import result_session
-from loading_module import loading_session
+from module.login_upload_module import login_section
+from module.signup_module import signup_section
+from module.result_module import result_session
+from module.loading_module import loading_session
 
-from session_manager import session_state_init
+from module.session_manager import session_state_init
 
 
 session_state_init()
