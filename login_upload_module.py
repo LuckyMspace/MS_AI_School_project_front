@@ -66,7 +66,6 @@ def login_section():
                     }
                     st.session_state["flask_upload_url"] = flask_server_url
                     st.session_state["request_form"] = files
-                    st.write(st.session_state["email"])
                     st.session_state["loading"] = True
                     st.session_state["current_page"] = "loading"
                     st.experimental_rerun()
