@@ -71,6 +71,7 @@ def login_section():
                     st.experimental_rerun()
 
                 st.button(":postbox: AI에게 이미지 보내기", on_click=upload_request)
+                        
 
             st.subheader(" ", divider="grey")
             if st.button(":x:로그아웃"):

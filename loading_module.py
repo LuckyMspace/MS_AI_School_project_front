@@ -5,7 +5,6 @@ import requests
 import requests
 import json
 
-
 def result_backend():
     if not st.session_state["flask_upload_url"]:
         print("No url")
@@ -30,6 +29,7 @@ def result_backend():
         time.sleep(3)
         st.session_state["current_page"] = "image_upload"
         st.experimental_rerun()
+        
 
 
 def loading_session():
