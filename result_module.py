@@ -9,7 +9,7 @@ from reference import style_array
 def result_session():
     if not st.session_state.get("logged_in", False):
         st.warning("로그인이 필요한 서비스입니다.")
-        st.experimental_rerun()
+        st.session_state["needs_rerun"] = True
 
     # UI 나누기
     st.title("이런 스타일은 어떠세요?")
@@ -59,7 +59,7 @@ def result_session():
 
     def click_sub(sub):
         st.session_state["result"]["style"] = sub
-        st.experimental_rerun()
+        st.session_state["needs_rerun"] = True
 
     if found:
         st.title("이런 스타일은 어떠세요?")
