@@ -3,7 +3,7 @@ import requests
 import json
 from PIL import Image
 from io import BytesIO
-from reference import style_array
+from .reference import style_array
 
 
 def result_session():
@@ -48,10 +48,10 @@ def result_session():
     style = st.session_state["result"]["style"]
     searched = st.session_state["result"]["sets"]
     if not found:
-        st.write("해당하는 추천 set을 찾을 수 없습니다 ;ㅅ;")
+        st.write("해당하는 추천 set을 찾을 수 없습니다.")
 
     elif style not in searched:
-        st.write(f"선택하신 스타일 {style_array[int(style)]}의 추천 set을 찾을 수 없습니다 ;ㅅ;")
+        st.write(f"선택하신 스타일 {style_array[int(style)]}의 추천 set을 찾을 수 없습니다.")
         # st.error("No data available")
     else:
         show_set(searched[style][0])
